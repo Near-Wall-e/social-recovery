@@ -1,0 +1,17 @@
+package com.example.emailservice;
+
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@CrossOrigin("*")
+@RestController
+public class EmailController {
+
+    @PostMapping("email")
+    public void addUserData(@RequestBody UserInfo userInfo) {
+        //save to db
+    }
+}
