@@ -1,5 +1,5 @@
 [package]
-name = "hello_near"
+name = "alert_contract"
 version = "1.0.0"
 authors = ["Near Inc <hello@near.org>"]
 edition = "2021"
@@ -10,6 +10,7 @@ crate-type = ["cdylib"]
 [dependencies]
 near-sdk = "4.0.0"
 uint = { version = "0.9.3", default-features = false }
+serde = "1.0.145"
 
 [profile.release]
 codegen-units = 1
