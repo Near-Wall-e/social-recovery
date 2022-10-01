@@ -67,7 +67,7 @@ mod tests {
         };
         println!("{:?}", &event);
         assert_eq!(
-            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"recover_account","data":[{"account":"TestAccount","recoverer":"Friend","recover_pk":"deaddeaddead"}]}"#,
+            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"recover_account","data":{"account":"TestAccount","recoverer":"Friend","recover_pk":"deaddeaddead"}}"#,
             format!("{}", event),
         );
         let event = EventLog {
@@ -80,7 +80,7 @@ mod tests {
         };
         println!("{:?}", &event);
         assert_eq!(
-            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"cancel_recover","data":[{"account":"TestAccount","recover_pk":"deaddeaddead"}]}"#,
+            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"cancel_recover","data":{"account":"TestAccount","recover_pk":"deaddeaddead"}}"#,
             format!("{}", event),
         );
     }
