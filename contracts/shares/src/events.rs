@@ -2,13 +2,9 @@ use std::fmt;
 
 use near_sdk::serde::{Deserialize, Serialize};
 
-/// This spec can be treated like a version of the standard.
 pub const METADATA_SPEC: &str = "1.0.0";
-/// This is the name of the NFT standard we're using
 pub const STANDARD_NAME: &str = "alert-contract";
 
-/// Enum that represents the data type of the EventLog.
-/// The enum can either be an NftMint or an NftTransfer.
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(tag = "event", content = "data")]
 #[serde(rename_all = "snake_case")]
@@ -19,19 +15,12 @@ pub enum Notification {
     CancelRecover(CancelRecoverNotify),
 }
 
-/// Interface to capture data about an event
-///
-/// Arguments:
-/// * `standard`: name of standard e.g. nep171
-/// * `version`: e.g. 1.0.0
-/// * `event`: associate event data
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
 pub struct EventLog {
     pub standard: String,
     pub version: String,
 
-    // `flatten` to not have "event": {<EventLogVariant>} in the JSON, just have the contents of {<EventLogVariant>}.
     #[serde(flatten)]
     pub event: Notification,
 }
@@ -68,9 +57,7 @@ mod tests {
     #[test]
     fn test_notification() {
         let event = EventLog {
-            // Standard name ("nep171").
             standard: STANDARD_NAME.to_string(),
-            // Version of the standard ("nft-1.0.0").
             version: METADATA_SPEC.to_string(),
             event: Notification::RecoverAccount(RecoverAccountNotify {
                 account: "TestAccount".to_string(),
@@ -84,9 +71,7 @@ mod tests {
             format!("{}", event),
         );
         let event = EventLog {
-            // Standard name ("nep171").
             standard: STANDARD_NAME.to_string(),
-            // Version of the standard ("nft-1.0.0").
             version: METADATA_SPEC.to_string(),
             event: Notification::CancelRecover(CancelRecoverNotify {
                 account: "TestAccount".to_string(),

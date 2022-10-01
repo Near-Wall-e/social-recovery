@@ -36,9 +36,7 @@ impl AlertContract {
             _ => panic!("Wrong notification.")
         };
         let event = EventLog {
-            // Standard name ("nep171").
             standard: STANDARD_NAME.to_string(),
-            // Version of the standard ("nft-1.0.0").
             version: METADATA_SPEC.to_string(),
             event: notification
         };
