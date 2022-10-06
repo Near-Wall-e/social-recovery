@@ -17,7 +17,7 @@ const MAX_RECOVERY_TIMEOUT: u64 = 60 * 60 * 24 * 365; // YEAR SHOULD BE A MAXIMU
 const ALERT_CONTRACT_ACCOUNT_ID: &str = "alert.nearuaguild.testnet"; // NOTIFICATION CONTRACT
 const GAS_FOR_NOTIFICATION: Gas = Gas(150_000_000_000_000);
 
-#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
+#[derive(Clone, Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
 pub enum State {
     NORECOVER,     // no recover
     APPROVING,     // collecting recover approves from trusted parties
@@ -25,13 +25,13 @@ pub enum State {
 }
 
 /// The struct is used only for return data.
-#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
+#[derive(Clone, Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
 pub struct RecoverStatus {
     state: State,
     approved_accounts: HashMap<AccountId, PublicKey>,
 }
 
-#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
+#[derive(Clone, Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
 pub struct RecoverConfig {
     threshold: usize,
     timeout: u64,
@@ -44,7 +44,7 @@ pub trait ExtLinkDropAlarmContract {
 }
 
 #[near_bindgen]
-#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
+#[derive(Clone, Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
 pub struct RecoveryContract {
     // Used only for dev, for real deploy loggin will be inside the same contract.
     alarm_contract: AccountId,
@@ -86,6 +86,10 @@ impl RecoveryContract {
             },
             approved_accounts: HashMap::new(),
         }
+    }
+
+    pub fn get_self(&mut self) -> RecoveryContract {
+        return self.clone()
     }
 
     pub fn update_config(&mut self, config: RecoverConfig) {
@@ -147,10 +151,6 @@ impl RecoveryContract {
         if timeout > env::block_timestamp() {
             panic!("You should wait for timeout: {}", timeout);
         }
-    }
-
-    pub fn get_config(&mut self) -> RecoverConfig {
-        return self.config
     }
 }
 
