@@ -148,6 +148,10 @@ impl RecoveryContract {
             panic!("You should wait for timeout: {}", timeout);
         }
     }
+
+    pub fn get_config(&mut self) -> RecoverConfig {
+        return self.config
+    }
 }
 
 /*
