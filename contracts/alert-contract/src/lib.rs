@@ -7,7 +7,7 @@
 */
 
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{env, log, near_bindgen};
+use near_sdk::{env, log, near_bindgen, AccountId};
 use shares::*;
 
 #[near_bindgen]
@@ -23,7 +23,7 @@ impl Default for AlertContract {
 #[near_bindgen]
 impl AlertContract {
     pub fn notify(&self, notification: Notification) {
-        let predecessor_account_id = env::predecessor_account_id().to_string();
+        let predecessor_account_id = AccountId::new_unchecked(env::predecessor_account_id().to_string());
         let notification = match notification {
             Notification::RecoverAccount(mut n) => {
                 n.account = predecessor_account_id;

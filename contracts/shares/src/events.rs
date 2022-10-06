@@ -1,11 +1,13 @@
 use std::fmt;
 
 use near_sdk::serde::{Deserialize, Serialize};
+use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
+use near_sdk::{PublicKey, AccountId};
 
 pub const METADATA_SPEC: &str = "1.0.0";
 pub const STANDARD_NAME: &str = "alert-contract";
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Debug)]
 #[serde(tag = "event", content = "data")]
 #[serde(rename_all = "snake_case")]
 #[serde(crate = "near_sdk::serde")]
@@ -15,7 +17,7 @@ pub enum Notification {
     CancelRecover(CancelRecoverNotify),
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
 pub struct EventLog {
     pub standard: String,
@@ -34,19 +36,19 @@ impl fmt::Display for EventLog {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
 pub struct RecoverAccountNotify {
-    pub account: String,
-    pub recoverer: String,
-    pub recover_pk: String,
+    pub account: AccountId,
+    pub recoverer: AccountId,
+    pub recover_pk: PublicKey,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
 pub struct CancelRecoverNotify {
-    pub account: String,
-    pub recover_pk: String,
+    pub account: AccountId,
+    pub recover_pk: PublicKey,
 }
 
 
@@ -60,27 +62,27 @@ mod tests {
             standard: STANDARD_NAME.to_string(),
             version: METADATA_SPEC.to_string(),
             event: Notification::RecoverAccount(RecoverAccountNotify {
-                account: "TestAccount".to_string(),
-                recoverer: "Friend".to_string(),
-                recover_pk: "deaddeaddead".to_string(),
+                account: AccountId::new_unchecked("test.testnet".to_string()),
+                recoverer: AccountId::new_unchecked("friend.testnet".to_string()),
+                recover_pk: "ed25519:6E8sCci9badyRkXb3JoRpBj5p8C6Tw41ELDZoiihKEtp".parse().unwrap(),
             })
         };
         println!("{:?}", &event);
         assert_eq!(
-            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"recover_account","data":{"account":"TestAccount","recoverer":"Friend","recover_pk":"deaddeaddead"}}"#,
+            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"recover_account","data":{"account":"test.testnet","recoverer":"friend.testnet","recover_pk":"ed25519:6E8sCci9badyRkXb3JoRpBj5p8C6Tw41ELDZoiihKEtp"}}"#,
             format!("{}", event),
         );
         let event = EventLog {
             standard: STANDARD_NAME.to_string(),
             version: METADATA_SPEC.to_string(),
             event: Notification::CancelRecover(CancelRecoverNotify {
-                account: "TestAccount".to_string(),
-                recover_pk: "deaddeaddead".to_string(),
+                account: AccountId::new_unchecked("test.testnet".to_string()),
+                recover_pk: "ed25519:6E8sCci9badyRkXb3JoRpBj5p8C6Tw41ELDZoiihKEtp".parse().unwrap(),
             })
         };
         println!("{:?}", &event);
         assert_eq!(
-            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"cancel_recover","data":{"account":"TestAccount","recover_pk":"deaddeaddead"}}"#,
+            r#"EVENT_JSON:{"standard":"alert-contract","version":"1.0.0","event":"cancel_recover","data":{"account":"test.testnet","recover_pk":"ed25519:6E8sCci9badyRkXb3JoRpBj5p8C6Tw41ELDZoiihKEtp"}}"#,
             format!("{}", event),
         );
     }
