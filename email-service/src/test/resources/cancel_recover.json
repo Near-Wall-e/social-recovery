@@ -1,0 +1,16 @@
+{
+  "chain_id": "Testnet",
+  "alert_rule_id": 107,
+  "alert_name": "Event cancel_recover logged in alert.nearuaguild.testnet",
+  "payload": {
+    "Events": {
+      "block_hash": "8KVwMbX12vgsKt7YGgqLp6SbeTHjB4bsuJkzdM5fFPF1",
+      "receipt_id": "Cp4UGbHCe1X4qo8cvnxTyicuNQTHpHzNLH6ZrPdC9cVc",
+      "transaction_hash": "DbbqenjTsaKoCnNjkgxpJv4iktqb1hy7qHxnf8KJ7dJh",
+      "event": "cancel_recover",
+      "standard": "alert-contract",
+      "version": "1.0.0",
+      "data": {"account":"metabuildtestaccount.testnet","recover_pk":"ed25519:6E8sCci9badyRkXb3JoRpBj5p8C6Tw41ELDZoiihKEtp"}
+    }
+  }
+}

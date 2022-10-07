@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-
 public class UserInfo {
     private String email;
-    private String address;
+    private String account;
 }
