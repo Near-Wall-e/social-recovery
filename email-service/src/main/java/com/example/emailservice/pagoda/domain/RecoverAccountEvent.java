@@ -18,6 +18,10 @@ public class RecoverAccountEvent extends RecoverEvent {
         this.recoverer = recoverer;
     }
 
+    public String getRecoverer() {
+        return recoverer;
+    }
+
     @Override
     EventType getEvenType() {
         return RECOVER;
