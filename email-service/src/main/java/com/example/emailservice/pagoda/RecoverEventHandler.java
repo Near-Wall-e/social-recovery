@@ -20,7 +20,9 @@ public class RecoverEventHandler implements EventHandler {
     public void handel(Events events) {
         RecoverAccountEvent recoverEvent = (RecoverAccountEvent) events.getData();
         User user = userRepository.findByAccount(recoverEvent.getAccount());
-        emailService.sendMessage(user.getEmail(), "Process recover is started", String.format("The process is started for user %s by %s", user.getAccount(), recoverEvent.getRecoverer()));
+        emailService.sendMessage(user.getEmail(), "Process recover is started", String.format(
+                "The process is started for user %s by %s \n" +
+                        "Recover PK:%s", user.getAccount(), recoverEvent.getRecoverer(), recoverEvent.getRecoverPK()));
     }
 
     @Override

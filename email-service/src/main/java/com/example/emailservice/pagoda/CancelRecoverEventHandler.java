@@ -22,7 +22,7 @@ public class CancelRecoverEventHandler implements EventHandler {
     public void handel(Events events) {
         CancelRecoverEvent recoverEvent = (CancelRecoverEvent) events.getData();
         User user = userRepository.findByAccount(recoverEvent.getAccount());
-        emailService.sendMessage(user.getEmail(), "Recover was canceled", String.format("The recover was canceled for user %s", user.getAccount()));
+        emailService.sendMessage(user.getEmail(), "Recover is canceled", String.format("The recover is canceled for user %s", user.getAccount()));
     }
 
     @Override
