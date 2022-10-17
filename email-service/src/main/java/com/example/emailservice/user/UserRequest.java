@@ -1,11 +1,12 @@
-package com.example.emailservice;
+package com.example.emailservice.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserInfo {
+public class UserRequest {
     private String email;
     private String account;
+
 }
