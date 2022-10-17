@@ -15,6 +15,7 @@ pub const STANDARD_NAME: &str = "alert-contract";
 pub enum Notification {
     RecoverAccount(RecoverAccountNotify),
     CancelRecover(CancelRecoverNotify),
+    SubscriptionPayed(SubscriptionNotify),
 }
 
 #[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Debug)]
@@ -49,6 +50,14 @@ pub struct RecoverAccountNotify {
 pub struct CancelRecoverNotify {
     pub account: AccountId,
     pub recover_pk: PublicKey,
+}
+
+#[derive(Serialize, Deserialize, BorshDeserialize, BorshSerialize, Debug)]
+#[serde(crate = "near_sdk::serde")]
+pub struct SubscriptionNotify {
+    pub account: AccountId,
+    pub amount: u128,
+    pub sub_id: usize,
 }
 
 
