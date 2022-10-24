@@ -9,6 +9,8 @@ import com.example.emailservice.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 import static com.example.emailservice.pagoda.domain.EventType.CANCEL;
 
 @Service
@@ -29,4 +31,6 @@ public class CancelRecoverEventHandler implements EventHandler {
     public EventType getEvenType() {
         return CANCEL;
     }
+
+
 }
