@@ -1,0 +1,13 @@
+.header-profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.account-name {
+    margin-right: 10px;
+}
+
+.signout-icon {
+    margin-right: 5px;
+}
