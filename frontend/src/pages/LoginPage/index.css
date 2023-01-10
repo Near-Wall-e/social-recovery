@@ -1,0 +1,16 @@
+.login-page {
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login-button {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.login-button-icon {
+    margin-right: 5px;
+}

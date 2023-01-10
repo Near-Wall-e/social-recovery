@@ -1,0 +1,21 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-button {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.login-button-icon {
+    margin-right: 5px;
+}
+
+.login-box {
+    color: white;
+}
